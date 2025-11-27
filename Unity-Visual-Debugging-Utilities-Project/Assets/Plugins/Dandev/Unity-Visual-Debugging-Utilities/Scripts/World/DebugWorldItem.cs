@@ -22,7 +22,7 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
             transform.localScale = new Vector3(size, size, size);
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (_timeLeft > 0)
             {

@@ -18,6 +18,8 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
 #if UNITY_EDITOR
             RemoveAllLineRenderers();
             
+            Material targetMaterial = Resources.Load<Material>(ResourcesPath_Material);
+            
             var newChild = new GameObject("Cube (Line Renderer)");
             newChild.transform.parent = transform;
             newChild.transform.localPosition = Vector3.zero;
@@ -28,6 +30,7 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
             lr.useWorldSpace = false;
             lr.startWidth = width;
             lr.endWidth = width;
+            lr.material = targetMaterial;
             lineRenderers.Add(lr);
             
             UpdateCubeVertices();

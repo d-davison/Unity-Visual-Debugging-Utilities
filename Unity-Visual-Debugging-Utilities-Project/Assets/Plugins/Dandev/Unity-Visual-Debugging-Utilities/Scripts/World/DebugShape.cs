@@ -6,10 +6,12 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
     public class DebugShape : DebugWorldItem
     {
         [SerializeField] protected float size = 1;
-        [SerializeField] protected float width = 0.1f;
+        [SerializeField] protected float width = 0.05f;
         [SerializeField] protected List<LineRenderer> lineRenderers = new List<LineRenderer>();
         
         protected bool _initialized = false;
+        
+        protected const string ResourcesPath_Material = "Mat_DefaultLineRenderer";
         
         public override void ConfigureItem(DebugDrawController controller, Shapes shape, Vector3 position, Vector3 rotation, float duration = 5,
             Color color = default, float size = 1)
@@ -18,8 +20,7 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
 
             foreach (var lineRenderer in lineRenderers)
             {
-                lineRenderer.startColor = color;
-                lineRenderer.endColor = color;
+                lineRenderer.material.color = color;
             }
         }
 
@@ -33,6 +34,8 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
             //Remove everything under the shape
             foreach (var trans in GetComponentsInChildren<Transform>(true))
             {
+                if (trans.gameObject == this.gameObject)
+                    continue;
                 DestroyImmediate(trans.gameObject);
             }
 

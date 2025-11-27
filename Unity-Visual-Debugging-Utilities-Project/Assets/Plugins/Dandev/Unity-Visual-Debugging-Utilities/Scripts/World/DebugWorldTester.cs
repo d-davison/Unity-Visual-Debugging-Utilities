@@ -6,17 +6,38 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
     {
         public void DebugDrawCube()
         {
-            DebugDraw.Cube();
+            DebugDraw.Cube(RandomPosition(), RandomDuration(), RandomSize(), RandomColor());
         }
 
         public void DebugDrawSphere()
         {
-            DebugDraw.Sphere();
+            DebugDraw.Sphere(RandomPosition(), RandomDuration(), RandomSize(), RandomColor());
         }
 
         public void DebugDrawText()
         {
-            DebugDraw.Text();
+            string text = "Hello World!";
+            DebugDraw.Text(RandomPosition(), text, RandomDuration(), RandomSize(), RandomColor());
+        }
+        
+        private Vector3 RandomPosition()
+        {
+            return new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), Random.Range(-10f, 10f));
+        }
+
+        private float RandomDuration()
+        {
+            return Random.Range(1f, 10f);
+        }
+
+        private float RandomSize()
+        {
+            return Random.Range(0.5f, 3f);
+        }
+
+        private Color RandomColor()
+        {
+            return Color.HSVToRGB(Random.value, 1f, 1f);
         }
     }
 }

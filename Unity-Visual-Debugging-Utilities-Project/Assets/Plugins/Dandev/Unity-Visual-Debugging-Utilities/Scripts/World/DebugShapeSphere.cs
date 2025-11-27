@@ -13,6 +13,8 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
             #if UNITY_EDITOR
             RemoveAllLineRenderers();
             
+            Material targetMaterial = Resources.Load<Material>(ResourcesPath_Material);
+            
             // We need 3 LineRenderers for 3 circles (XY, XZ, YZ)
             for (int i = 0; i < 3; i++)
             {
@@ -24,6 +26,7 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
                 lr.widthMultiplier = width;
                 lr.loop = true;
                 lr.positionCount = segments;
+                lr.material = targetMaterial;
                 lineRenderers.Add(lr);
             }
             

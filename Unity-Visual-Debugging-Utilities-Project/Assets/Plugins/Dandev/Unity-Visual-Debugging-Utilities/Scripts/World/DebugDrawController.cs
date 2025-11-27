@@ -14,7 +14,7 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
         private const string ResourcesPath_Sphere = "DebugShapeSphere";
         private const string ResourcesPath_Text = "DebugText";
 
-        public void DrawItem(Shapes shape, Vector3 position, Vector3 rotation, Color color, float duration, float size, string text = null)
+        public void DrawItem(Shapes shape, Vector3 position, Vector3 rotation, Color color, float duration, float size, string label = null)
         {
             switch (shape)
             {
@@ -25,9 +25,13 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
                     break;
                 case Shapes.Cube:
                     DebugShapeCube cube = _cubes.Get();
+                    cube.transform.position = position;
+                    cube.ConfigureItem(this, shape, position, rotation, duration, color, size);
                     break;
                 case Shapes.Text:
-                    DebugText debugText = _texts.Get();
+                    DebugText text = _texts.Get();
+                    text.transform.position = position;
+                    text.ConfigureText(this, shape, position, rotation, label, duration, color, size);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(shape), shape, null);

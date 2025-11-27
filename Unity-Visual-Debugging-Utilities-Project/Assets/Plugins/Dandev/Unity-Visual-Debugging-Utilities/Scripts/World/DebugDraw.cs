@@ -32,19 +32,24 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
             _controller = Instantiate(controllerPrefab, transform);
         }
         
-        public static void Sphere()
+        public static void Sphere(Vector3 position, float duration = 5f, float size = 1, Color color = default)
         {
-            Instance._controller.DrawItem(Shapes.Sphere, Vector3.zero, Vector3.zero, Color.white, 5, 1);
+            Instance._controller.DrawItem(Shapes.Sphere, position, Vector3.zero, color, duration, size);
         }
         
-        public static void Cube()
+        public static void Cube(Vector3 position, float duration = 5f, float size = 1, Color color = default)
         {
-            Instance._controller.DrawItem(Shapes.Cube, Vector3.zero, Vector3.zero, Color.white, 5, 1);
+            Instance._controller.DrawItem(Shapes.Cube, position, Vector3.zero, color, duration, size);
+        }
+        
+        public static void Cube(Vector3 position, Vector3 rotation, float duration = 5f, float size = 1, Color color = default)
+        {
+            Instance._controller.DrawItem(Shapes.Cube, position, rotation, color, duration, size);
         }
 
-        public static void Text()
+        public static void Text(Vector3 position, string label, float duration = 5f, float size = 1, Color color = default)
         {
-            Instance._controller.DrawItem(Shapes.Text, Vector3.zero, Vector3.zero, Color.white, 5, 1, "Testing");
+            Instance._controller.DrawItem(Shapes.Text, position, Vector3.zero, color, duration, size, label);
         }
     }
 
