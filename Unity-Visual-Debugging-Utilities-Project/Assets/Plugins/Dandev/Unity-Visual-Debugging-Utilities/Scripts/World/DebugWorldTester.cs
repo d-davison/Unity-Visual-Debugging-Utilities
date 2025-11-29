@@ -22,7 +22,7 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
         
         private Vector3 RandomPosition()
         {
-            return new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), Random.Range(-10f, 10f));
+            return new Vector3(Random.Range(-10f, 10f), Random.Range(0, 10f), Random.Range(-10f, 10f));
         }
 
         private float RandomDuration()

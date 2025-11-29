@@ -1,4 +1,5 @@
 using System;
+using Plugins.Dandev.Unity_Visual_Debugging_Utilities.Scripts;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -9,10 +10,6 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
         private IObjectPool<DebugShapeCube> _cubes;
         private IObjectPool<DebugShapeSphere> _spheres;
         private IObjectPool<DebugText> _texts;
-        
-        private const string ResourcesPath_Cube = "DebugShapeCube";
-        private const string ResourcesPath_Sphere = "DebugShapeSphere";
-        private const string ResourcesPath_Text = "DebugText";
 
         public void DrawItem(Shapes shape, Vector3 position, Vector3 rotation, Color color, float duration, float size, string label = null)
         {
@@ -59,9 +56,9 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
 
         private void Awake()
         {
-            _cubes = CreateObjectPool<DebugShapeCube>(ResourcesPath_Cube, 5);
-            _spheres = CreateObjectPool<DebugShapeSphere>(ResourcesPath_Sphere, 5);
-            _texts = CreateObjectPool<DebugText>(ResourcesPath_Text, 10);
+            _cubes = CreateObjectPool<DebugShapeCube>(DebugUtilities.CubePath, 5);
+            _spheres = CreateObjectPool<DebugShapeSphere>(DebugUtilities.SpherePath, 5);
+            _texts = CreateObjectPool<DebugText>(DebugUtilities.TextPath, 10);
         }
         
         private IObjectPool<T> CreateObjectPool<T>(string resourcePath, int capacity) where T : Component

@@ -1,3 +1,4 @@
+using Plugins.Dandev.Unity_Visual_Debugging_Utilities.Scripts;
 using UnityEngine;
 
 namespace Dandev.Unity_Visual_Debugging_Utilities
@@ -13,7 +14,7 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
             #if UNITY_EDITOR
             RemoveAllLineRenderers();
             
-            Material targetMaterial = Resources.Load<Material>(ResourcesPath_Material);
+            Material targetMaterial = Resources.Load<Material>(DebugUtilities.AlwaysOnTopMaterialPath);
             
             // We need 3 LineRenderers for 3 circles (XY, XZ, YZ)
             for (int i = 0; i < 3; i++)

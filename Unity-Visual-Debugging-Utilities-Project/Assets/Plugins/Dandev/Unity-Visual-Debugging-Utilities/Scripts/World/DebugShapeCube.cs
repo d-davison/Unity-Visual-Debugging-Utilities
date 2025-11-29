@@ -1,3 +1,4 @@
+using Plugins.Dandev.Unity_Visual_Debugging_Utilities.Scripts;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
 #if UNITY_EDITOR
             RemoveAllLineRenderers();
             
-            Material targetMaterial = Resources.Load<Material>(ResourcesPath_Material);
+            Material targetMaterial = Resources.Load<Material>(DebugUtilities.AlwaysOnTopMaterialPath);
             
             var newChild = new GameObject("Cube (Line Renderer)");
             newChild.transform.parent = transform;

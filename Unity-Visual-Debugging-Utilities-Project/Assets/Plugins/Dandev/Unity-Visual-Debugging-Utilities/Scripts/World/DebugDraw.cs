@@ -1,4 +1,6 @@
+using Plugins.Dandev.Unity_Visual_Debugging_Utilities.Scripts;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace Dandev.Unity_Visual_Debugging_Utilities
 {
@@ -24,11 +26,10 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
         }
         
         private DebugDrawController _controller;
-        private const string ResourcesPath = "DebugDrawController";
         
         private void Initialize()
         {
-            DebugDrawController controllerPrefab = Resources.Load<DebugDrawController>(ResourcesPath);
+            DebugDrawController controllerPrefab = Resources.Load<DebugDrawController>(DebugUtilities.DebugDrawControllerPath);
             _controller = Instantiate(controllerPrefab, transform);
         }
         

@@ -11,8 +11,6 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
         
         protected bool _initialized = false;
         
-        protected const string ResourcesPath_Material = "Mat_DefaultLineRenderer";
-        
         public override void ConfigureItem(DebugDrawController controller, Shapes shape, Vector3 position, Vector3 rotation, float duration = 5,
             Color color = default, float size = 1)
         {

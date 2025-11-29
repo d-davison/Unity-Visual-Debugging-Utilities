@@ -24,6 +24,8 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
 
         protected virtual void Update()
         {
+            if (_controller == null) return; //This was manually placed or placed incorrectly (not through DebugDraw)
+            
             if (_timeLeft > 0)
             {
                 _timeLeft -= Time.deltaTime;
