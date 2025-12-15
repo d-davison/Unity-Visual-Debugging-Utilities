@@ -5,7 +5,14 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
 {
     public class DebugShapeSphere : DebugShape
     {
-        [SerializeField] private int segments = 16;
+        [Tooltip("Segments are the fidelity of the sphere.")]
+        [Range(6, 32)][SerializeField] private int segments = 16;
+        
+        [Tooltip("Horizontal rings are the circles from bottom to top (latitude). Best to be an odd number")]
+        [Range(1, 32)][SerializeField] private int horizontalRings = 7;
+        
+        [Tooltip("Vertical rings are the circles rotated on the y axis (longitude). Best to be an even number")]
+        [Range(2, 32)][SerializeField] private int verticalRings = 12;
 
         public override void DrawShape()
         {
@@ -16,8 +23,11 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
             
             Material targetMaterial = Resources.Load<Material>(DebugUtilities.AlwaysOnTopMaterialPath);
             
-            // We need 3 LineRenderers for 3 circles (XY, XZ, YZ)
-            for (int i = 0; i < 3; i++)
+            int seg = Mathf.Max(6, segments);
+            int latCount = Mathf.Max(1, horizontalRings);
+            int lonCount = Mathf.Max(2, verticalRings);
+            
+            for (int i = 0; i < latCount + lonCount; i++)
             {
                 var child = new GameObject($"Circle_{i}");
                 child.transform.SetParent(transform, false);
@@ -31,54 +41,69 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
                 lineRenderers.Add(lr);
             }
             
-            UpdateSphereVertices();
+            UpdateSphereVertices(seg, latCount, lonCount);
             
             #else
             Debug.LogWarning("Editor only function.");
             #endif
         }
         
-        private void UpdateSphereVertices()
+        private void UpdateSphereVertices(int seg, int latCount, int lonCount)
         {
-            if (lineRenderers.Count < 3) return;
+            float radius = size * 0.5f;
 
-            float radius = size / 2;
+            int index = 0;
+            
+            for (int i = 0; i < latCount; i++)
+            {
+                float t = (i + 1f) / (latCount + 1f);          // (0..1) excluding ends
+                float y = Mathf.Lerp(-radius, radius, t);      // bottom to top
+                float ringRadius = Mathf.Sqrt(Mathf.Max(0f, radius * radius - y * y));
 
-            // Circle on XY plane (Z is 0)
-            DrawCircle(lineRenderers[0], radius, 0);
-            
-            // Circle on XZ plane (Y is 0)
-            DrawCircle(lineRenderers[1], radius, 1);
-            
-            // Circle on YZ plane (X is 0)
-            DrawCircle(lineRenderers[2], radius, 2);
+                DrawLatitudeRing(lineRenderers[index], ringRadius, y, seg);
+                index++;
+            }
+
+            // Longitude rings (vertical): great circles going through the poles.
+            // Construct a circle in the YZ plane, then rotate it around Y by phi.
+            for (int j = 0; j < lonCount; j++)
+            {
+                float phi = (j / (float)lonCount) * (2f * Mathf.PI);
+                DrawLongitudeRing(lineRenderers[index], radius, phi, seg);
+                index++;
+            }
         }
         
-        private void DrawCircle(LineRenderer lr, float radius, int axisIndex)
+        private static void DrawLatitudeRing(LineRenderer lr, float ringRadius, float y, int seg)
         {
-            // axisIndex: 0 = XY plane, 1 = XZ plane, 2 = YZ plane
-            
-            for (int i = 0; i < segments; i++)
+            for (int k = 0; k < seg; k++)
             {
-                float angle = i * (2f * Mathf.PI / segments);
-                float x = Mathf.Cos(angle) * radius;
-                float y = Mathf.Sin(angle) * radius;
+                float a = (k / (float)seg) * (2f * Mathf.PI);
+                float x = Mathf.Cos(a) * ringRadius;
+                float z = Mathf.Sin(a) * ringRadius;
 
-                Vector3 point = Vector3.zero;
-                switch (axisIndex)
-                {
-                    case 0: // XY
-                        point = new Vector3(x, y, 0);
-                        break;
-                    case 1: // XZ
-                        point = new Vector3(x, 0, y);
-                        break;
-                    case 2: // YZ
-                        point = new Vector3(0, x, y);
-                        break;
-                }
-                
-                lr.SetPosition(i, point);
+                lr.SetPosition(k, new Vector3(x, y, z));
+            }
+        }
+
+        private static void DrawLongitudeRing(LineRenderer lr, float radius, float phi, int seg)
+        {
+            float cosPhi = Mathf.Cos(phi);
+            float sinPhi = Mathf.Sin(phi);
+
+            for (int k = 0; k < seg; k++)
+            {
+                float a = (k / (float)seg) * (2f * Mathf.PI);
+
+                // Base great circle in YZ plane: (0, sin(a)*r, cos(a)*r)
+                float y = Mathf.Sin(a) * radius;
+                float z0 = Mathf.Cos(a) * radius;
+
+                // Rotate around Y by phi: (x,z) = rotY(phi) * (0,z0)
+                float x = sinPhi * z0;
+                float z = cosPhi * z0;
+
+                lr.SetPosition(k, new Vector3(x, y, z));
             }
         }
     }
