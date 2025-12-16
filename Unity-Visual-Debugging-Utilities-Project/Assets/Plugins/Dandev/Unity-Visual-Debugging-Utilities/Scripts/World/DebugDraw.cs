@@ -52,12 +52,19 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
         {
             Instance._controller.DrawItem(Shapes.Text, position, Vector3.zero, color, duration, size, label);
         }
+
+        public static void Arrow(Vector3 position, Vector3 direction, float duration = 5f, float size = 1,
+            Color color = default)
+        {
+            Instance._controller.DrawItem(Shapes.Arrow, position, direction, color, duration, size);
+        }
     }
 
     public enum Shapes
     {
-        Sphere,
-        Cube,
-        Text
+        Sphere = 0,
+        Cube = 1,
+        Text = 2,
+        Arrow = 3,
     }
 }

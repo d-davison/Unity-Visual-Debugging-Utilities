@@ -20,6 +20,11 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
             DebugDraw.Text(RandomPosition(), text, RandomDuration(), RandomSize(), RandomColor());
         }
         
+        public void DebugDrawArrow()
+        {
+            DebugDraw.Arrow(RandomPosition(), Vector3.up, RandomDuration(), RandomSize(), RandomColor());
+        }
+        
         private Vector3 RandomPosition()
         {
             return new Vector3(Random.Range(-10f, 10f), Random.Range(0, 10f), Random.Range(-10f, 10f));

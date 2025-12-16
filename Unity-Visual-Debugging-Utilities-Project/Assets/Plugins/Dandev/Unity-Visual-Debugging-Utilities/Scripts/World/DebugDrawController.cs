@@ -9,6 +9,7 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
     {
         private IObjectPool<DebugShapeCube> _cubes;
         private IObjectPool<DebugShapeSphere> _spheres;
+        private IObjectPool<DebugShapeArrow> _arrows;
         private IObjectPool<DebugText> _texts;
 
         public void DrawItem(Shapes shape, Vector3 position, Vector3 rotation, Color color, float duration, float size, string label = null)
@@ -30,6 +31,11 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
                     text.transform.position = position;
                     text.ConfigureText(this, shape, position, rotation, label, duration, color, size);
                     break;
+                case Shapes.Arrow:
+                    DebugShapeArrow arrow = _arrows.Get();
+                    arrow.transform.position = position;
+                    arrow.ConfigureItem(this, shape, position, rotation, duration, color, size);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(shape), shape, null);
             }
@@ -48,6 +54,9 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
                 case Shapes.Text:
                     _texts.Release(debugWorldItem as DebugText);
                     break;
+                case Shapes.Arrow:
+                    _arrows.Release(debugWorldItem as DebugShapeArrow);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(shape), shape, null);
             }
@@ -59,6 +68,7 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
             _cubes = CreateObjectPool<DebugShapeCube>(DebugUtilities.CubePath, 5);
             _spheres = CreateObjectPool<DebugShapeSphere>(DebugUtilities.SpherePath, 5);
             _texts = CreateObjectPool<DebugText>(DebugUtilities.TextPath, 10);
+            _arrows = CreateObjectPool<DebugShapeArrow>(DebugUtilities.ArrowPath, 5);
         }
         
         private IObjectPool<T> CreateObjectPool<T>(string resourcePath, int capacity) where T : Component

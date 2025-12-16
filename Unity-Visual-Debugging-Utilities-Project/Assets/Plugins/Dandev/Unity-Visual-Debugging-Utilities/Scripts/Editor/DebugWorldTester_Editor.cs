@@ -24,6 +24,11 @@ namespace Dandev.Unity_Visual_Debugging_Utilities
                 tester.DebugDrawSphere();
             }
 
+            if (GUILayout.Button("Draw Arrow"))
+            {
+                tester.DebugDrawArrow();
+            }
+
             if (GUILayout.Button("Draw Text"))
             {
                 tester.DebugDrawText();
