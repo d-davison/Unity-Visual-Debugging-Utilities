@@ -104,7 +104,7 @@ Then call the static methods from anywhere (Update, coroutines, gameplay code, e
 ## Usage examples
 
 ### On-screen messages
-![Roundabout Traffic gameplay](https://github.com/d-davison/Unity-Visual-Debugging-Utilites/blob/main/Media/screen-debugger.gif)
+![Roundabout Traffic gameplay](https://github.com/d-davison/Unity-Visual-Debugging-Utilities/blob/main/Media/screen-debugger.gif)
 
 ```csharp
 // Basic message for 2 seconds in yellow
@@ -124,7 +124,7 @@ if (!hasTarget)
 ```
 
 ### World-space shapes and text
-![Roundabout Traffic gameplay](https://github.com/d-davison/Unity-Visual-Debugging-Utilites/blob/main/Media/random-world-debugging.gif)
+![Roundabout Traffic gameplay](https://github.com/d-davison/Unity-Visual-Debugging-Utilities/blob/main/Media/random-world-debugging.gif)
 
 ```csharp
 // Sphere at a position for 5 seconds
@@ -148,7 +148,7 @@ DebugDraw.Arrow(agent.position, dir, 2.5f, 1f, Color.red);
 
 ### Always on Top
 Note that the shapes will always appear on top!
-![Roundabout Traffic gameplay](https://github.com/d-davison/Unity-Visual-Debugging-Utilites/blob/main/Media/world-debugging-always-on-top.gif)
+![Roundabout Traffic gameplay](https://github.com/d-davison/Unity-Visual-Debugging-Utilities/blob/main/Media/world-debugging-always-on-top.gif)
 
 ### DebugScreen
 ```csharp
