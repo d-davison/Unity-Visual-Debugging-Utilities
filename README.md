@@ -7,7 +7,7 @@ Unreal-style on-screen and world-space debug visualization for Unity. This packa
 
 ---
 
-![Roundabout Traffic gameplay](https://github.com/d-davison/Unity-Visual-Debugging-Utilites/blob/main/Media/random-world-debugging.gif)
+![Roundabout Traffic gameplay](https://github.com/d-davison/Unity-Visual-Debugging-Utilities/blob/main/Media/random-world-debugging.gif)
 
 ## Contents
 
