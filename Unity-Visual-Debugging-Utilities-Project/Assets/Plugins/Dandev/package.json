@@ -1,0 +1,11 @@
+{
+  "name": "com.Dandev.Unity-Visual-Debugging-Utilities",
+  "version": "1.0.0",
+  "displayName": "Unity Visual Debugging Utilities",
+  "description": "Visual debugging utilities for Unity",
+  "unity": "6000.3.12f1",
+  "author": {
+    "name": "Dan Davison",
+    "email": "dandavison99@gmail.com"
+  }
+}
