@@ -11,10 +11,10 @@ Unreal-style on-screen and world-space debug visualization for Unity. This packa
 
 ## Contents
 
-- [Overview](#overview)  
+- [Overview](#overview)
+- [Quick start](#quick-start)  
 - [Unreal equivalents](#unreal-equivalents)  
 - [Requirements and setup](#requirements-and-setup)  
-- [Quick start](#quick-start)  
 - [Usage examples](#usage-examples)  
   - [On-screen messages](#on-screen-messages)  
   - [World-space shapes and text](#world-space-shapes-and-text)  
@@ -31,6 +31,23 @@ This utility provides:
 - World-space debug drawing: sphere, cube, text, and arrow (akin to Unreal’s `DrawDebug*` helpers)
 - Zero scene setup: singletons auto-initialize on first use and persist across scenes
 - Shapes render on top of the scene to remain visible even when occluded
+
+---
+
+## Quick start
+
+To install the package in to your Unity project:
+1. Head to Window -> Package Management -> Package Manager.
+2. From there, click the + in the top left, and click "Add package from git url..."
+3. Add this url https://github.com/d-davison/Unity-Visual-Debugging-Utilities.git?path=/Unity-Visual-Debugging-Utilities-Project/Assets/Plugins/Dandev
+4. Click Install
+
+To use the package, make sure to add the namespace:
+```csharp
+using Dandev.Unity_Visual_Debugging_Utilities;
+```
+
+Then call the static methods from anywhere (Update, coroutines, gameplay code, etc.). The first call auto-creates the required GameObjects and loads their controllers from Resources.
 
 ---
 
@@ -90,17 +107,6 @@ DebugDraw.Sphere(new Vector3(0, 1, 0), 5f, 1f, Color.green);
 
 ---
 
-## Quick start
-
-Add the namespace:
-```csharp
-using Dandev.Unity_Visual_Debugging_Utilities;
-```
-
-Then call the static methods from anywhere (Update, coroutines, gameplay code, etc.). The first call auto-creates the required GameObjects and loads their controllers from Resources.
-
----
-
 ## Usage examples
 
 ### On-screen messages
@@ -144,12 +150,6 @@ Vector3 dir = (goal.position - agent.position).normalized;
 DebugDraw.Arrow(agent.position, dir, 2.5f, 1f, Color.red);
 ```
 
----
-
-### Always on Top
-Note that the shapes will always appear on top!
-![Roundabout Traffic gameplay](https://github.com/d-davison/Unity-Visual-Debugging-Utilities/blob/main/Media/world-debugging-always-on-top.gif)
-
 ### DebugScreen
 ```csharp
 public static void Log(string label, float time, Color color)
@@ -176,6 +176,10 @@ Parameters (common):
 - `color`: Optional; if omitted, the controller’s default color is used.
 
 ---
+
+### Always on Top
+Note that the shapes will always appear on top!
+![Roundabout Traffic gameplay](https://github.com/d-davison/Unity-Visual-Debugging-Utilities/blob/main/Media/world-debugging-always-on-top.gif)
 
 ## License and contributions
 
