@@ -1,6 +1,5 @@
 using Plugins.Dandev.Unity_Visual_Debugging_Utilities.Scripts;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 namespace Dandev.Unity_Visual_Debugging_Utilities
 {
